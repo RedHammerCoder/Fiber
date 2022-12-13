@@ -9,12 +9,12 @@
 
 swtch:
     pushq %rbp
-# rcx 保持不动保证
+# rdi 保持不动保证
     movq %rsp , %rbp
-# rcx 位于content的栈底 即高位  rcx 保持不动  后续作为参数导入sche
-    movq %rsp , -248(%rcx)  # 保存当前栈
-    movq %rcx , %rsp
-    subq $(248-120) , %rsp  # 从栈顶指向栈 reg 栈区顶端
+# rdi 位于content的栈底 即高位  rdi 保持不动  后续作为参数导入sche
+    movq %rsp , 248(%rdi)  # 保存当前栈
+    movq %rdi , %rsp
+    addq $(248) , %rsp  # 从栈顶指向栈 reg 栈区顶端
     pushq %rsp
     pushq %rbp
     pushq %rcx
@@ -34,9 +34,10 @@ swtch:
     call _Z9SchedulerP7Content
 # 返回值保存在rax
 # TODO： 从对面的寄存器恢复数据
-    movq %rax , %rcx
-    movq %rcx , %rsp
+    movq %rax , %rdi
+    movq %rdi , %rsp
 # rax 作为返回值是栈底 从栈底依此弹出寄存器
+    addq $(248-120) , %rsp
     popq %r8 
     popq %r9
     popq %r10
@@ -52,7 +53,8 @@ swtch:
     popq %rcx
     popq %rbp
     popq %rsp # 已经完全恢复栈
-    popq %rbp # 准备退出栈
+    movq %rbp , %rsp 
+    popq %rbp
     ret
 
 

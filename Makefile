@@ -20,3 +20,7 @@ test  : fiber test/fib_test.cpp
 
 test_1 : test/test1.cpp fiber
 	gcc   test/test1.cpp     -L. -lfiber  -ggdb   -o test_fiber1.out
+
+
+gdb_test_1 : test_1
+	gdb ./test_fiber1.out

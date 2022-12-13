@@ -1,0 +1,26 @@
+con = 56b2c0
+rsp = fdbc8
+0x5555556b151
+        6b141
+
+rsp = 56b368
+
+比较pop R8 时候rsp的值应该相同
+
+-------------
+stack bottom b3b7
+stack top  b340
+
+------------
+stack top  b340
+stack bottom 
+
+
+
+----------
+
+start state
+rbp ffdb70
+rsp ffdb50
+
+
