@@ -1,37 +1,55 @@
 #pragma once
 #include <stdint.h>
-#include <cstddef>
+#include <stddef.h>
 #include <functional>
+#include "def.h"
+
+// using U64 = uint64_st;
 
 using func_pack = std::function<void(void)>;
-class Content {
-
-};
 
 
 
+// struct Content {
+//     U64 UDF[16];//给scheduler 使用
+//     U64 R8;
+//     U64 R9;
+//     U64 R10;
+//     U64 R11;
+//     U64 R12;
+//     U64 R13;
+//     U64 R14;
+//     U64 R15;
+//     U64 rdi;
+//     U64 rsi;
+//     U64 rbx;
+//     U64 rax;
+//     U64 rcx;
+//     U64 rbp;
+//     U64 rsp;
+// };
 
-void* stackmalloc(size_t ); 
+
+
+
+
+
 // 用于获取Content
 Content* GetContent();
+
+void FreeContent(Content* );
 
 
 
 // 协程调度器
-void Scheduler(void* T);
+Content* Scheduler(Content *);
 
-//协程初始化
-void fiber( );
-
-
-//从当前运行空间中swtchout 保存当前上下文
-void swtch(Content * context  );
 
 
 //将作为参数的被打包的函数以及参数作为
-void fiberfunc(func_pack);
+// void fiberfunc(func_pack);
 
 
-
+void yield();
 
 // Cowork with thread;

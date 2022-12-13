@@ -16,6 +16,14 @@ int main(){
     } 
 
 
+    SWTCH;
+
+
+
+
+    return 0;
+
+
 
 }
 
