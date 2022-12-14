@@ -9,7 +9,7 @@
 
 swtch:
     pushq %rbp
-# rdi 保持不动保证
+# rdi 保持不动
     movq %rsp , %rbp
 # rdi 位于content的栈底 即高位  rdi 保持不动  后续作为参数导入sche
     movq %rsp , 248(%rdi)  # 保存当前栈
@@ -58,7 +58,20 @@ swtch:
     ret
 
 
-    
+
+
+
+# create a stackframe  
+# frame_explore
+.global frame_explore
+frame_explore :
+    pushq %rbp
+    movq  %rsp , %rbp
+    movq  %rbp , %rdi
+    call frame_change
+    movq %rbp , %rsp
+    popq %rbp
+    ret
 
 
 

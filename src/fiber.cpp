@@ -26,3 +26,7 @@ void yield(){
 }
 
 
+void fiberalloc(func_pack _task){
+    
+
+}

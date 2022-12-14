@@ -1,11 +1,11 @@
 
-src = src/fiber.cpp src/swtch.S 
+src = src/fiber.cpp src/swtch.S   src/frame.c
 inc = inc/fiber.h  inc/def.h
 CFLAGS =  -Wall -g  -fPIC -shared
 
 .PHONY : env
 env :
-	export LD_LIBRARY_PATH=./:$PATH
+	export LD_LIBRARY_PATH=./: $PATH
 
 
 fiber :	 ${src}  ${inc}

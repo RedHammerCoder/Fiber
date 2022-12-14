@@ -32,6 +32,13 @@ using func_pack = std::function<void(void)>;
 
 
 
+// TODO: 获取一个栈空间 让后
+void fiberalloc(func_pack );
+
+// 用于释放从认为分配的栈空间
+void FiberRet();
+
+
 
 
 // 用于获取Content

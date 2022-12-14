@@ -59,9 +59,7 @@ swapcontext:
     r14
     r15
 
-如何实现RIP的切换？
-使用ret指令实现RIP的加载
-需要确定rip在当前
+
 
 //需要修改最小偏移
 
@@ -76,3 +74,64 @@ size :248
 
 
 -------
+
+
+
+函数调用的rsp变化
+rsp = ffdce0
+rsp = ffded8
+
+
+
+
+
+-------------------------------
+ 问题二 如何分配一个新的栈以及建造一个 栈帧
+ 并且在栈帧上保存一个函数
+
+  what you have ? a stack a task_pack 
+  task_pack 用于保存被调用点 即rip 
+  stack即rsp
+
+
+----------------------stack 
+rip 始终指向下一个元素 
+call something ---> push rip ; rip ++
+push rbp # 建立栈帧  
+
+
+
+-------------
+rip
+rbp   <---rbp 
+
+
+
+
+
+main : 
+rsp   ffdbe0
+rip   55195
+
+
+
+frame_explore:
+rsp ffdbd8
+rip fb728a
+
+
+frame_change : addr  fb729c
+rip = 55189
+
+
+ret后 rip = fb729b
+t1= da0d90
+
+
+T= ffffdbf0
+rsp = fffdbc0
+
+
+
+after call
+mem addr is fb7292

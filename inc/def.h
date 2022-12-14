@@ -29,4 +29,7 @@ struct Content {
 
 extern "C" {
     Content *  swtch(Content * context  );
+    void frame_explore();
+    void frame_change(__uint64_t (*T)[4] );
+    void frame_loop();
 }
