@@ -1,27 +1,27 @@
 #include "../inc/fiber.h"
 // #include "../inc/def.h"
+#include <stdio.h>
 
 
 
-
-Content* Scheduler (Content* caller){
+context* Scheduler (context* caller){
     return caller;
 }
 
-Content* GetContent(){
+context* GetContent(){
     // only use c++ 's news operator
-    Content* T =  new Content();
+    context* T =  new context();
     return T;
 }
 
-void FreeContent(Content* con ){
+void FreeContent(context* con ){
     delete con;
 
 }
 
 void yield(){
-    auto* con = GetContent();
-    con =  swtch(con); 
+    context* con = GetContent();
+    con =  swtch(con,0); 
     FreeContent(con);
 }
 
@@ -30,3 +30,16 @@ void fiberalloc(func_pack _task){
     
 
 }
+
+
+
+
+Content* StackCreate(){
+    Content *T = new Content();
+    return T;
+}
+
+
+
+
+

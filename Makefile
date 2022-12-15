@@ -24,3 +24,8 @@ test_1 : test/test1.cpp fiber
 
 gdb_test_1 : test_1
 	gdb ./test_fiber1.out
+
+
+
+test_stack_create : test/test_stack.cpp fiber
+	g++ -g test/test_stack.cpp  -L. -lfiber  -ggdb   -o stack.out

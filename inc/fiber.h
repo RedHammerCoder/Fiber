@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <functional>
 #include "def.h"
+#include <stdio.h>
 
 // using U64 = uint64_st;
 
@@ -42,14 +43,14 @@ void FiberRet();
 
 
 // 用于获取Content
-Content* GetContent();
+context* GetContent();
 
-void FreeContent(Content* );
+void FreeContent(context* );
 
-
+Content* StackCreate();
 
 // 协程调度器
-Content* Scheduler(Content *);
+context* Scheduler(context *);
 
 
 
@@ -60,3 +61,29 @@ Content* Scheduler(Content *);
 void yield();
 
 // Cowork with thread;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------TEST
+void Printhello(){
+    int n = 20;
+    printf("hello \n");
+    
+}
+
+
+void base(){
+    int n = 20;
+    printf("base \n");
+    
+}
