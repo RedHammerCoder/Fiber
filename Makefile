@@ -1,31 +1,36 @@
 
-src = src/fiber.cpp src/swtch.S   src/frame.c
+src = src/fiber.cpp src/swtch.S   
 inc = inc/fiber.h  inc/def.h
-CFLAGS =  -Wall -g  -fPIC -shared
+ifdef DEBUG
+DEBUG_F = -g
+endif
 
-.PHONY : env
-env :
-	export LD_LIBRARY_PATH=./: $PATH
+CFLAGS =  -Wall ${DEBUG_F}  -fPIC -shared
+STATIC_FLAGS =  -m64 -Werror  ${DEBUG_F}  -c
 
-
-fiber :	 ${src}  ${inc}
-	g++ ${CFLAGS} -m64 -o libfiber.so  ${src}
-
-
-
-
-test  : fiber test/fib_test.cpp
-	gcc  -I. -lfiber.so    -o test_fiber.out  test/fib_test.cpp  -ggdb
+init:
+	-mkdir ./BUILD | rm -rf ./BUILD/*
+clean :
+	-rm -rf ./BUILD
+	-rm ./*.o  | rm ./*.out | rm ./*.so
 
 
-test_1 : test/test1.cpp fiber
-	gcc   test/test1.cpp     -L. -lfiber  -ggdb   -o test_fiber1.out
+.PHONY :  init
 
 
-gdb_test_1 : test_1
-	gdb ./test_fiber1.out
+fiber :	 ${src}  ${inc}  init
+	g++ ${CFLAGS} -m64 -o ./BUILD/libfiber.so  ${src}
+	g++ ${STATIC_FLAGS}  ${src}  
+	cp ./*.o  ./BUILD
+	ar crv libfiber.a  ./BUILD/*.o
+
+
+gdb_test_alloc : test_alloc
+	gdb ./alloc.out
 
 
 
-test_stack_create : test/test_stack.cpp fiber
-	g++ -g test/test_stack.cpp  -L. -lfiber  -ggdb   -o stack.out
+test_alloc : test/test_alloc.cpp fiber
+	g++ -g test/test_alloc.cpp  ./libfiber.a  -ggdb   -o alloc.out
+
+

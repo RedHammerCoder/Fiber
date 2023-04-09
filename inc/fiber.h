@@ -34,20 +34,20 @@ using func_pack = std::function<void(void)>;
 
 
 // TODO: 获取一个栈空间 让后
-void fiberalloc(func_pack );
+// void fiberalloc(func_pack );
 
 // 用于释放从认为分配的栈空间
-void FiberRet();
+// void FiberRet();
 
-
-
+// 用于构建已经完成的；
+Content* StackCreate(void(task)(),size_t siz);
 
 // 用于获取Content
 context* GetContent();
 
 void FreeContent(context* );
 
-Content* StackCreate();
+// Content* StackCreate();
 
 // 协程调度器
 context* Scheduler(context *);
@@ -61,29 +61,8 @@ context* Scheduler(context *);
 void yield();
 
 // Cowork with thread;
+void ContentRegist(Content * ctxt);
+// TOOD: free wasted stacks ;
+void StackFree();
 
 
-
-
-
-
-
-
-
-
-
-
-
-// ---------------TEST
-void Printhello(){
-    int n = 20;
-    printf("hello \n");
-    
-}
-
-
-void base(){
-    int n = 20;
-    printf("base \n");
-    
-}

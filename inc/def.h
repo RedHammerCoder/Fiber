@@ -9,11 +9,15 @@ struct context {
     U64 RBP;
 };
 
+struct STACK {
+    U64 StackBase;
+    U64 Offset;
+};
 
 
 struct Content {
     // U64 UDF[16];//给scheduler 使用
-    U64 freeaddr[256];
+    U64 freeaddr[46];
     U64 R8;
     U64 R9;
     U64 R10;
@@ -29,7 +33,9 @@ struct Content {
     U64 rcx;
     U64 rbp;
     U64 rip;
-    U64 base;
+    U64 stackdealloc;
+    U64 StackBase;
+    U64 StackSize;
 
 
 
@@ -42,10 +48,8 @@ struct Content {
 extern "C" 
 {
     context *swtch(context * context , void* rsp );
-    void frame_explore();
-    void frame_change(__uint64_t (*T)[4] );
-    void frame_loop();
     void reg_recover(context* t);
+    void StackDealloc();// 内嵌在提供的协程栈结构中用于最后的栈空间销毁
 }
 
 
